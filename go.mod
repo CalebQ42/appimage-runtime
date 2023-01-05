@@ -2,7 +2,7 @@ module github.com/CalebQ42/static-appimage
 
 go 1.19
 
-require github.com/CalebQ42/squashfs v0.7.5
+require github.com/CalebQ42/squashfs v0.7.6
 
 require (
 	github.com/CalebQ42/fuse v0.1.0 // indirect

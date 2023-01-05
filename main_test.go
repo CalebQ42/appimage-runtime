@@ -15,10 +15,10 @@ import (
 )
 
 var (
-	appimageDownload = "https://github.com/srevinsaju/discord-appimage/releases/download/stable/Discord-0.0.22-x86_64.AppImage"
-	appimage         = "testing/discord.appimage"
-	appimageSquash   = "testing/discord.sfs"
-	newAppImage      = "testing/test-discord.appimage"
+	appimageDownload = "https://github.com/cemu-project/Cemu/releases/download/v2.0-25/Cemu-2.0-25-x86_64.AppImage"
+	appimage         = "testing/cemu.appimage"
+	appimageSquash   = "testing/cemu.sfs"
+	newAppImage      = "testing/test-cemu.appimage"
 )
 
 // Creates a new file with the given AppImage squash archive with it as the runtime.

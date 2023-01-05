@@ -1,7 +1,7 @@
 github.com/CalebQ42/fuse v0.1.0 h1:KLCNjun7zcd2kBNVFfH+SWJyhuwJdE0nhw5/q8K8HGQ=
 github.com/CalebQ42/fuse v0.1.0/go.mod h1:pJpoKG03HJKVhsp8o0YQYqmfbFsr3Eowt90yQGQVO+4=
-github.com/CalebQ42/squashfs v0.7.5 h1:gu+y5+I269nKpOxLjuk2iy9CSkWESc4izXlBjpmmiB0=
-github.com/CalebQ42/squashfs v0.7.5/go.mod h1:xLd45WKaJTaH3OFLrh8VxsEN0MOvn9m+cSMdAUh/6oE=
+github.com/CalebQ42/squashfs v0.7.6 h1:3yOdN1ulcE5ZXwkHQnXnw2FNkItmRHWvuLIPuEnzzDc=
+github.com/CalebQ42/squashfs v0.7.6/go.mod h1:xLd45WKaJTaH3OFLrh8VxsEN0MOvn9m+cSMdAUh/6oE=
 github.com/klauspost/compress v1.15.12 h1:YClS/PImqYbn+UILDnqxQCZ3RehC9N318SU3kElDUEM=
 github.com/klauspost/compress v1.15.12/go.mod h1:QPwzmACJjUTFsnSHH934V6woptycfrDDJnH7hvFVbGM=
 github.com/pierrec/lz4/v4 v4.1.17 h1:kV4Ip+/hUBC+8T6+2EgburRtkE9ef4nbY3f4dFhGjMc=
