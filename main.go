@@ -14,8 +14,17 @@ const (
 )
 
 func main() {
+	fuse3 := true
+	_, err := exec.LookPath("fusermount3")
+	if err != nil {
+		fuse3 = false
+		_, err = exec.LookPath("fusermount")
+		if err != nil {
+			panic("Cannot mount AppImage, please check your FUSE setup.\nYou might still be able to extract the contents of this AppImage\nif you run it with the --appimage-extract option.\nSee https://github.com/AppImage/AppImageKit/wiki/FUSE\nfor more information")
+		}
+	}
 	me := os.Args[0]
-	me, err := filepath.Abs(me)
+	me, err = filepath.Abs(me)
 	if err != nil {
 		panic(err)
 	}
@@ -33,11 +42,19 @@ func main() {
 		panic(err)
 	}
 	defer os.Remove(mntDir)
-	err = sfs.Mount(mntDir)
-	if err != nil {
-		panic(err)
+	if fuse3 {
+		err = sfs.Mount(mntDir)
+		if err != nil {
+			panic(err)
+		}
+		defer sfs.Unmount()
+	} else {
+		err = sfs.MountFuse2(mntDir)
+		if err != nil {
+			panic(err)
+		}
+		defer sfs.UnmountFuse2()
 	}
-	defer sfs.Unmount()
 	cmd := exec.Command("sh", "-c", filepath.Join(mntDir, "AppRun"))
 	cmd.Stdout = os.Stdout
 	cmd.Stdin = os.Stdin
