@@ -38,7 +38,7 @@ func main() {
 		panic(err)
 	}
 	defer sfs.Unmount()
-	cmd := exec.Command(filepath.Join(mntDir, "AppRun"))
+	cmd := exec.Command("sh", "-c", filepath.Join(mntDir, "AppRun"))
 	cmd.Stdout = os.Stdout
 	cmd.Stdin = os.Stdin
 	cmd.Stderr = os.Stderr
