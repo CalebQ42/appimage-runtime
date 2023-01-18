@@ -99,7 +99,7 @@ func main() {
 	}
 	// TODO: Change to sfs.Unmount.
 	// There is some sort of race condition in the fuse library that causes it to not work and hang indefinitely.
-	defer exec.Command("umount", mntDir)
+	defer exec.Command("umount", mntDir).Run()
 	cmd := exec.Command("sh", "-c", filepath.Join(mntDir, "AppRun"))
 	cmd.Stdout = os.Stdout
 	cmd.Stdin = os.Stdin
