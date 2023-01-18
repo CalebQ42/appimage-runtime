@@ -1,2 +1,4 @@
-/static-appimage
 /testing
+/build
+*.appimage
+*.AppImage

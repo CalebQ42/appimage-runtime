@@ -1,6 +1,8 @@
 package main
 
 import (
+	"flag"
+	"fmt"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -9,11 +11,14 @@ import (
 )
 
 const (
-	//
+	//TODO: Don't hardcode this size.
 	runtimeSize = 4000000
 )
 
 func main() {
+	extract := flag.Bool("e", false, "Extract the AppImage archive to $FILENAME.extract Cannot combine with -m.")
+	mnt := flag.Bool("m", false, "Only mount the AppImage (mount location will be printed)")
+	flag.Parse()
 	fuse3 := true
 	_, err := exec.LookPath("fusermount3")
 	if err != nil {
@@ -37,6 +42,14 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+	if *extract {
+		os.Remove(me + ".extract")
+		err = sfs.ExtractTo(me + ".extract")
+		if err != nil {
+			panic(err)
+		}
+		return
+	}
 	mntDir, err := os.MkdirTemp("", filepath.Base(me)+"-*")
 	if err != nil {
 		panic(err)
@@ -55,6 +68,11 @@ func main() {
 		}
 		defer sfs.UnmountFuse2()
 	}
+	if *mnt {
+		fmt.Println("Mounted to:", mntDir)
+		sfs.MountWait()
+		return
+	}
 	cmd := exec.Command("sh", "-c", filepath.Join(mntDir, "AppRun"))
 	cmd.Stdout = os.Stdout
 	cmd.Stdin = os.Stdin
@@ -62,5 +80,6 @@ func main() {
 	err = cmd.Run()
 	if err != nil {
 		panic(err)
-	}
+	defer sfs.Unmount()
+	sfs.MountWait()
 }
