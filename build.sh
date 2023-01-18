@@ -39,6 +39,8 @@ while [ $# -gt 0 ]; do
       shift;;
     -s)
       STRIP=true;;
+    --help)
+      help_message;;
     -h)
       help_message;;
     *)
@@ -62,7 +64,7 @@ fi
 PATH=$BUILDDIR/zig:$PATH
 
 if [ -z $BUILDARCH ]; then
-  BUILDARCH=(386 amd64 arm arm64)
+  BUILDARCH=($(go env GOHOSTARCH))
 fi
 
 for arch in ${BUILDARCH[@]}; do
