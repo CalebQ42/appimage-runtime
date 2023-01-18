@@ -9,3 +9,7 @@ As of right now, this is considered alpha quality and needs significantly more t
 You can build the runtime, as well as attach the runtime to existing AppImages using `build.sh`. You can additionally use `attach/attach.go` (which is made to be run using `go run`) on it's own to attach the runtime to existing AppImages.
 
 AppImage's using this runtime might now integrate properly with some applications (namely appimaged from `https://github.com/probonopd/go-appimage` would not be able to integrate it properly).
+
+## Specifications
+
+The runtime is obviously very similiar to the normal AppImage runtime, with the only difference that bytes 11-14 (directly after the AppImage magic bytes) get decoded as a `uint32` that specifies the runtime's size.
