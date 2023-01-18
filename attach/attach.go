@@ -5,15 +5,9 @@ import (
 	"encoding/binary"
 	"errors"
 	"flag"
-	"fmt"
 	"io"
 	"os"
 	"strings"
-)
-
-const (
-	//TODO: Don't hardcode this size.
-	runtimeOffset = 4000000
 )
 
 func main() {
@@ -64,19 +58,15 @@ func main() {
 			if err != nil {
 				panic(err)
 			}
-			runSiz, err := io.Copy(newFil, runtime)
+			_, err = io.Copy(newFil, runtime)
 			if err != nil {
 				panic(err)
 			}
-			empty, err := newFil.Write(make([]byte, runtimeOffset-runSiz))
-			if err != nil {
-				panic(err)
-			}
-			fmt.Println("offset:", empty+int(runSiz))
 			_, err = io.Copy(newFil, io.NewSectionReader(ai, offset, aiStat.Size()-offset))
 			if err != nil {
 				panic(err)
 			}
+			newFil.Chmod(0755)
 			newFil.Close()
 			runtime.Close()
 			ai.Close()

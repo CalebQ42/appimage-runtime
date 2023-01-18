@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# Largely based off of https://github.com/probonopd/go-appimage/blob/master/scripts/build.sh
+
 # build GOARCH
 build () {
     case $1 in
@@ -66,6 +68,8 @@ fi
 for arch in ${BUILDARCH[@]}; do
   build $arch
 done
+
+go run stamp/stamp.go  $BUILDDIR/static-appimage-*
 
 if [ ! -z $ATTACH ]; then
   HOSTARCH=$(go env GOHOSTARCH)
